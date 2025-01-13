@@ -1,4 +1,4 @@
-# **S3 Legal Data Security
+# S3 Legal Data Security
 
 ### **Domain:** Legal
 
