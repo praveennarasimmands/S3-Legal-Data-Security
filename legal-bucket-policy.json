@@ -1,0 +1,35 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAccessFromSpecificIP",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::legal-documents-bucket",
+                "arn:aws:s3:::legal-documents-bucket/*"
+            ],
+            "Condition": {
+                "IpAddress": {
+                    "aws:SourceIp": "Public_Ip_address/24"
+                }
+            }
+        },
+        {
+            "Sid": "RestrictAccessToLegalTeam",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::legal-documents-bucket",
+                "arn:aws:s3:::legal-documents-bucket/*"
+            ],
+            "Condition": {
+                "StringNotEquals": {
+                    "aws:PrincipalTag/role": "legal_team"
+                }
+            }
+        }
+    ]
+}
